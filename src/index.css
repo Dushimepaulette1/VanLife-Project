@@ -271,3 +271,150 @@ header a:hover {
     max-width: 900px;
   }
 }
+
+/*** VANS PAGE ***/
+.van-list-container {
+  padding: 23px;
+}
+
+.van-list-container h1 {
+  color: #161616;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+.van-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 30px;
+}
+
+.van-tile {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+}
+
+.van-tile:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+.van-tile img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 15px 15px 0 0;
+}
+
+.van-info {
+  padding: 15px 20px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.van-info h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #161616;
+}
+
+.van-info p {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #161616;
+}
+
+.van-info span {
+  font-weight: 400;
+  font-size: 0.9rem;
+  color: #4d4d4d;
+}
+
+.van-type {
+  margin: 0 20px 20px;
+  display: inline-block;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-transform: capitalize;
+  color: white;
+  border: none;
+}
+
+.van-type.simple {
+  background-color: #e17654;
+}
+
+.van-type.rugged {
+  background-color: #115e59;
+}
+
+.van-type.luxury {
+  background-color: #161616;
+}
+
+/* RESPONSIVE DESIGN FOR VANS - TABLET */
+@media (min-width: 768px) {
+  .van-list-container {
+    padding: 40px;
+  }
+
+  .van-list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+  }
+
+  .van-tile img {
+    height: 220px;
+  }
+}
+
+/* RESPONSIVE DESIGN FOR VANS - DESKTOP */
+@media (min-width: 1024px) {
+  .van-list-container {
+    padding: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .van-list-container h1 {
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+  }
+
+  .van-list {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 35px;
+  }
+
+  .van-tile img {
+    height: 240px;
+  }
+
+  .van-info h3 {
+    font-size: 1.375rem;
+  }
+
+  .van-info p {
+    font-size: 1.25rem;
+  }
+}
+
+/* RESPONSIVE DESIGN FOR VANS - LARGE DESKTOP */
+@media (min-width: 1200px) {
+  .van-list {
+    gap: 40px;
+  }
+
+  .van-tile img {
+    height: 260px;
+  }
+}
