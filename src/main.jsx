@@ -20,37 +20,102 @@ import Dashboard from "./Pages/Host/Dashboard.jsx";
 import Income from "./Pages/Host/Income.jsx";
 import Reviews from "./Pages/Host/Reviews.jsx";
 import HostLayout from "./Components/HostLayout.jsx";
-import HostVans from "./Pages/Host/HostVans.jsx";
-import HostVanDetails from "./Pages/Host/HostVanDetails.jsx";
+import HostVans, { loader as HostVansLoader } from "./Pages/Host/HostVans.jsx";
+import HostVanDetails, {
+  loader as HostVanDetailsLoader,
+} from "./Pages/Host/HostVanDetails.jsx";
 import HostVanInfo from "./Pages/Host/HostVanInfo.jsx";
 import HostVanPricing from "./Pages/Host/HostVanPricing.jsx";
 import HostVanPhotos from "./Pages/Host/HostVanPhotos.jsx";
 import NotFound from "./Pages/NotFound.jsx";
 import Error from "./Components/Error.jsx";
+import Login from "./Pages/Login.jsx";
 import { loader as vanLoader } from "./Pages/Vans.jsx";
+import { loader as VanDetailsLoader } from "./Pages/VanDetails.jsx";
+import Authentication from "./utils.js";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
       <Route index element={<Home />}></Route>
       <Route path="about" element={<About />}></Route>
-      <Route path="login" element={<Login />} />
+      <Route path="login" element={<Login />}></Route>
       <Route
         path="vans"
         element={<Vans />}
         errorElement={<Error />}
         loader={vanLoader}
       ></Route>
-      <Route path="vans/:id" element={<VanDetails />}></Route>
+      <Route
+        path="vans/:id"
+        element={<VanDetails />}
+        loader={VanDetailsLoader}
+      ></Route>
       <Route path="/host" element={<HostLayout />}>
-        <Route index element={<Dashboard />}></Route>
-        <Route path="income" element={<Income />}></Route>
+        <Route
+          loader={async () => {
+            const authResult = await Authentication();
+            if (authResult) return authResult;
+            return null;
+          }}
+          index
+          element={<Dashboard />}
+        ></Route>
+        <Route
+          loader={async () => {
+            const authResult = await Authentication();
+            if (authResult) return authResult;
+            return null;
+          }}
+          path="income"
+          element={<Income />}
+        ></Route>
 
-        <Route path="reviews" element={<Reviews />}></Route>
-        <Route path="vans" element={<HostVans />}></Route>
-        <Route path="vans/:id" element={<HostVanDetails />}>
-          <Route index element={<HostVanInfo />}></Route>
-          <Route path="pricing" element={<HostVanPricing />}></Route>
-          <Route path="photos" element={<HostVanPhotos />}></Route>
+        <Route
+          loader={async () => {
+            const authResult = await Authentication();
+            if (authResult) return authResult;
+            return null;
+          }}
+          path="reviews"
+          element={<Reviews />}
+        ></Route>
+        <Route
+          loader={HostVansLoader}
+          path="vans"
+          element={<HostVans />}
+        ></Route>
+        <Route
+          loader={HostVanDetailsLoader}
+          path="vans/:id"
+          element={<HostVanDetails />}
+        >
+          <Route
+            loader={async () => {
+              const authResult = await Authentication();
+              if (authResult) return authResult;
+              return null;
+            }}
+            index
+            element={<HostVanInfo />}
+          ></Route>
+          <Route
+            loader={async () => {
+              const authResult = await Authentication();
+              if (authResult) return authResult;
+              return null;
+            }}
+            path="pricing"
+            element={<HostVanPricing />}
+          ></Route>
+          <Route
+            loader={async () => {
+              const authResult = await Authentication();
+              if (authResult) return authResult;
+              return null;
+            }}
+            path="photos"
+            element={<HostVanPhotos />}
+          ></Route>
         </Route>
       </Route>
       <Route path="*" element={<NotFound />}></Route>

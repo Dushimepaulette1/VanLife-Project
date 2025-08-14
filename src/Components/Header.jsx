@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
+import userIcon from "../assets/images/User circle.png";
 export function Header() {
   const focusStyle = {
     fontWeight: "bold",
@@ -30,6 +31,9 @@ export function Header() {
         >
           Vans
         </NavLink>
+        <Link to="login" className="login-link">
+          <img src={userIcon} className="login-icon" />
+        </Link>
       </nav>
     </header>
   );
